@@ -43,7 +43,7 @@ public class DefaultBeanFactory implements BeanFactory {
                 this.beanDefinitionMap.put(id, bd);
             }
         } catch (DocumentException e) {
-            e.printStackTrace();
+            throw new BeanDefinitionStoreException("IOException parsing XML document", e);
         }finally {
             if(is != null){
                 try {
