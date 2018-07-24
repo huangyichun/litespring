@@ -34,4 +34,14 @@ public class BeanFactoryTest {
         }
         Assert.fail("expect BeanCreationException ");
     }
+
+    @Test
+    public void testInvalidXML(){
+        try {
+            new DefaultBeanFactory("xxxx.xml");
+        } catch (Exception e) {
+            return;
+        }
+        Assert.fail("expect BeanDefinitionStoreException ");
+    }
 }
