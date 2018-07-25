@@ -17,7 +17,7 @@ public class ClassUtils {
                 try {
                     cl = ClassLoader.getSystemClassLoader();
                 } catch (Throwable ex) {
-                    //Cannot access system ClassLoader- oh well, maube the caller can live with null....
+                    //Cannot access system ClassLoader- oh well, may be the caller can live with null....
                 }
             }
         }
