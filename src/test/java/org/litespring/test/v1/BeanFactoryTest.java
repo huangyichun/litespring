@@ -17,6 +17,7 @@ public class BeanFactoryTest {
 
     DefaultBeanFactory factory = null;
     XmlBeanDefinitionReader reader = null;
+
     @Before
     public void setUp(){
         factory = new DefaultBeanFactory();
@@ -25,10 +26,8 @@ public class BeanFactoryTest {
 
     @Test
     public void testGetBean(){
-
         reader.loadBeanDefinition("petstore-v1.xml");
         BeanDefinition bd = factory.getBeanDefinition("petStore");
-
         assertEquals("org.litespring.service.v1.PetStoreService", bd.getBeanClassName());
         PetStoreService petStoreService = (PetStoreService)factory.getBean("petStore");
         assertNotNull(petStoreService);
@@ -36,7 +35,6 @@ public class BeanFactoryTest {
 
     @Test
     public void testInvalidBean(){
-
         reader.loadBeanDefinition("petstore-v1.xml");
         try {
             factory.getBean("invalidBean");
@@ -48,7 +46,6 @@ public class BeanFactoryTest {
 
     @Test
     public void testInvalidXML(){
-
         try {
             reader.loadBeanDefinition("xxx.xml ");
         } catch (Exception e) {
