@@ -43,6 +43,14 @@ public class BeanFactoryTest {
 
         PetStoreService petStoreService1 = (PetStoreService)factory.getBean("petStore");
         assertTrue(petStoreService.equals(petStoreService1));
+
+        //测试bean的ProtoType作用域
+        BeanDefinition bd1 = factory.getBeanDefinition("petStore1");
+        PetStoreService petStore = (PetStoreService) factory.getBean("petStore1");
+        PetStoreService petStore1 = (PetStoreService) factory.getBean("petStore1");
+        assertTrue(bd1.isPrototype());
+        assertEquals(BeanDefinition.SCOPE_PROTOTYPE, bd1.getScope());
+        assertFalse(petStore.equals(petStore1));
     }
 
     @Test
