@@ -44,7 +44,7 @@ public class XmlBeanDefinitionReader {
                 this.registry.registerBeanDefinition(id, bd);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new BeanDefinitionStoreException("IOException parsing XML document from " + resource.getDescription(), e);
         } finally {
             if(is != null){
                 try {
