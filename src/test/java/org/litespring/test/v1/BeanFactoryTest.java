@@ -13,8 +13,7 @@ import org.litespring.service.v1.PetStoreService;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 
 public class BeanFactoryTest {
@@ -33,9 +32,17 @@ public class BeanFactoryTest {
         Resource resource = new ClassPathResource("petstore-v1.xml");
         reader.loadBeanDefinition(resource);
         BeanDefinition bd = factory.getBeanDefinition("petStore");
+
+        assertTrue(bd.isSingleton());
+        assertFalse(bd.isPrototype());
+        assertEquals(BeanDefinition.SCOPE_DEFAULT, bd.getScope());
         assertEquals("org.litespring.service.v1.PetStoreService", bd.getBeanClassName());
+
         PetStoreService petStoreService = (PetStoreService)factory.getBean("petStore");
         assertNotNull(petStoreService);
+
+        PetStoreService petStoreService1 = (PetStoreService)factory.getBean("petStore");
+        assertTrue(petStoreService.equals(petStoreService1));
     }
 
     @Test
