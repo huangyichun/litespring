@@ -8,7 +8,8 @@ import org.litespring.util.ClassUtils;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class DefaultBeanFactory implements ConfigurableBeanFactory, BeanDefinitionRegistry{
+public class DefaultBeanFactory extends DefaultSingletonBeanRegistry
+        implements ConfigurableBeanFactory, BeanDefinitionRegistry{
 
     private final Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<String, BeanDefinition>();
     private ClassLoader beanClassLoader;
@@ -29,6 +30,18 @@ public class DefaultBeanFactory implements ConfigurableBeanFactory, BeanDefiniti
         if(bd == null){
             throw new BeanCreationException("Bean Definition does not exist");
         }
+        if(bd.isSingleton()){
+            Object bean = this.getSingleton(beanId);
+            if(bean == null){
+                bean = createBean(bd);
+                this.registerSingleton(beanId, bean);
+            }
+            return bean;
+        }
+        return createBean(bd);
+    }
+
+    private Object createBean(BeanDefinition bd) {
         ClassLoader cl = this.getBeanClassLoader();
         String beanClassName = bd.getBeanClassName();
         try {
