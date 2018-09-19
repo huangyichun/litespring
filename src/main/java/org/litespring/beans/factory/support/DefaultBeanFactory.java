@@ -11,6 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class DefaultBeanFactory extends DefaultSingletonBeanRegistry
         implements ConfigurableBeanFactory, BeanDefinitionRegistry{
 
+    //添加rebase内容
     private final Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<String, BeanDefinition>();
     private ClassLoader beanClassLoader;
 
