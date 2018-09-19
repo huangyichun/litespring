@@ -15,7 +15,7 @@ public abstract class AbstractApplicationContext implements ApplicationContext {
         this(configFile, ClassUtils.getDefaultClassLoader());
     }
 
-    //测试rebase
+    //我是master分支
     public AbstractApplicationContext(String configFile, ClassLoader cl) {
         factory = new DefaultBeanFactory();
         XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(factory);
